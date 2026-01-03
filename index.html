@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Access Code Screen */
+        #access-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #access-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .access-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .access-box h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .access-box p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        #code-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        #code-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #code-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        #verify-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #verify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #verify-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Main Content */
+        #main-content {
+            display: none;
+            min-height: 100vh;
+            position: relative;
+            padding: 40px 20px;
+            overflow: hidden;
+        }
+
+        .scattered-photos {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .floating-photo {
+            position: absolute;
+            width: 180px;
+            height: 240px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transform-origin: center;
+            pointer-events: auto;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            animation: floatPhoto 6s ease-in-out infinite;
+            background: white;
+        }
+
+        @keyframes floatPhoto {
+            0%, 100% {
+                transform: translateY(0) rotate(var(--initial-rotation));
+            }
+            50% {
+                transform: translateY(-15px) rotate(calc(var(--initial-rotation) + 2deg));
+            }
+        }
+
+        .floating-photo:hover {
+            transform: scale(1.25) rotate(calc(var(--initial-rotation) + 5deg)) !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            animation: none;
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .floating-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .floating-photo:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 12px;
+            color: white;
+            font-size: 0.9rem;
+            text-align: center;
+            opacity: 0.8; /* Always visible */
+            transition: opacity 0.3s ease;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        .floating-photo:hover .photo-caption {
+            opacity: 1;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3); /* More transparent */
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        .main-title {
+            font-size: 4.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ff6ec4, #7873f5, #4facfe, #00ff95);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 4s ease infinite;
+            text-shadow: none;
+            filter: drop-shadow(0 0 25px rgba(127, 115, 245, 0.7));
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .tagline {
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #ffffff;
+            font-style: italic;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+        }
+
+        #reveal-btn {
+            display: none;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            padding: 22px 60px;
+            font-size: 1.6rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5);
+            font-weight: bold;
+            letter-spacing: 1px;
+            animation: fadeIn 1.5s ease;
+            position: relative;
+            z-index: 20;
+            margin-top: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        #reveal-btn:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 0 20px 50px rgba(245, 87, 108, 0.7);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Message Overlay */
+        .message-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .message-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px;
+            border-radius: 30px;
+            max-width: 750px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+            position: relative;
+            animation: slideIn 0.5s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideIn {
+            from { transform: scale(0.8) translateY(50px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .exit-btn {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .exit-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .message-heading {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #fff;
+            text-align: center;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .letter-content {
+            line-height: 2;
+            text-align: left;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .letter-content p {
+            margin-bottom: 30px;
+        }
+
+        .video-container {
+            margin: 40px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+            max-height: 450px;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 50px;
+            font-size: 1.3rem;
+            color: #fff;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Fullscreen Photo Modal */
+        #fullscreen-photo {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        #fullscreen-photo img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 15px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .close-fullscreen {
+            position: absolute;
+            top: 35px;
+            right: 45px;
+            font-size: 3.5rem;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 3001;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-fullscreen:hover {
+            transform: rotate(90deg) scale(1.2);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Confetti Effect */
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            opacity: 0;
+            animation: confettiFall linear forwards;
+            z-index: 9999;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Heart Animation */
+        .heart {
+            position: absolute;
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            opacity: 0;
+            animation: heartFloat linear forwards;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Continue Button */
+        .continue-container {
+            margin-top: 40px;
+        }
+
+        #continue-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.5);
+            font-weight: bold;
+            display: none;
+            animation: bounceIn 1s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { transform: scale(1.1); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        #continue-btn:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 0 20px 50px rgba(79, 172, 254, 0.7);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Emoji in tagline */
+        .sun-emoji {
+            display: inline-block;
+            animation: sunRotate 3s infinite linear;
+        }
+
+        @keyframes sunRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 3rem;
+            }
+            
+            .tagline {
+                font-size: 1.5rem;
+            }
+            
+            .floating-photo {
+                width: 130px;
+                height: 180px;
+            }
+            
+            .message-box {
+                padding: 40px 25px;
+            }
+            
+            .message-heading {
+                font-size: 2rem;
+            }
+            
+            .letter-content {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+            
+            #reveal-btn, #continue-btn {
+                padding: 18px 40px;
+                font-size: 1.3rem;
+            }
+            
+            .content-wrapper {
+                padding: 40px 25px;
+                margin: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .floating-photo {
+                width: 110px;
+                height: 150px;
+            }
+            
+            #code-input {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            .access-box {
+                padding: 40px 25px;
+            }
+            
+            .access-box h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Access Code Screen -->
+    <div id="access-screen">
+        <div class="access-box">
+            <h2>🎂 Birthday Access 🎂</h2>
+            <p>Enter the special code to unlock the birthday surprise!</p>
+            <input type="password" id="code-input" placeholder="Enter birthday code..." maxlength="20">
+            <button id="verify-btn">Unlock Surprise</button>
+            <div id="error-message" class="error-message">Incorrect code! Try "HEMA210903"</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <div class="scattered-photos" id="scattered-photos"></div>
+        <div class="particles" id="particles-container"></div>
+        <div class="content-wrapper">
+            <h1 class="main-title">Happy Birthday!</h1>
+            <p class="tagline">This special day is all about YOU! <span class="sun-emoji">🌤</span></p>
+            <div class="continue-container">
+                <button id="continue-btn">Continue to Message</button>
+            </div>
+            <button id="reveal-btn">Click for Your Special Message</button>
+        </div>
+    </div>
+
+    <!-- Message Overlay -->
+    <div class="message-overlay" id="message-overlay">
+        <div class="message-box">
+            <button class="exit-btn" id="exit-btn">×</button>
+            <h2 class="message-heading">To The Most Amazing Person 🎂</h2>
+            <div class="letter-content">
+                <p>Dear Special One,</p>
+                
+                <p>On this wonderful day, I want you to know how incredibly special you are. Your birthday marks another year of your amazing journey, and I feel so grateful to be part of it.</p>
+                
+                <div class="video-container">
+                    <video controls>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-balloons-flying-over-a-green-field-5022-large.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <p>You bring so much joy, laughter, and light into the world. Your kindness touches everyone around you, and your spirit inspires those lucky enough to know you.</p>
+                
+                <p>Today is about celebrating YOU - all your dreams, your achievements, and the wonderful person you've become. May this year bring you endless happiness, success in all your endeavors, and dreams that soar higher than ever before.</p>
+                
+                <p>Remember that you are loved, valued, and appreciated more than words can express. Here's to making this birthday and the coming year absolutely unforgettable!</p>
+                
+                <div class="signature">
+                    <p>With all my love and best wishes,</p>
+                    <p>🎉 Your Biggest Fan 🎉</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Photo Modal -->
+    <div id="fullscreen-photo">
+        <span class="close-fullscreen">×</span>
+        <img id="fullscreen-img" src="" alt="Fullscreen View">
+    </div>
+
+    <script>
+        // Access Code Configuration
+        const ACCESS_CODE = "HEMA210903";
+        
+        // Photo URLs - Use your own images here
+        const PHOTO_URLS = [
+            "https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1529251333259-d36cccaf22ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+        ];
+        
+        const PHOTO_CAPTIONS = [
+            "Happy Times! ✨",
+            "Best Moments 🌟",
+            "Celebrating You! 🎉",
+            "Party Time! 🥳",
+            "Special Moments 💖",
+            "Cherished Memories 📸",
+            "Unforgettable Day 🌈",
+            "Joyful Celebration 🎊",
+            "Beautiful Memories 🌸",
+            "Birthday Bliss 🎂"
+        ];
+
+        // DOM Elements
+        const accessScreen = document.getElementById('access-screen');
+        const mainContent = document.getElementById('main-content');
+        const scatteredPhotos = document.getElementById('scattered-photos');
+        const messageOverlay = document.getElementById('message-overlay');
+        const codeInput = document.getElementById('code-input');
+        const verifyBtn = document.getElementById('verify-btn');
+        const errorMessage = document.getElementById('error-message');
+        const continueBtn = document.getElementById('continue-btn');
+        const revealBtn = document.getElementById('reveal-btn');
+        const exitBtn = document.getElementById('exit-btn');
+        const fullscreenPhoto = document.getElementById('fullscreen-photo');
+        const fullscreenImg = document.getElementById('fullscreen-img');
+        const closeFullscreen = document.querySelector('.close-fullscreen');
+        const particlesContainer = document.getElementById('particles-container');
+
+        // Pre-defined positions for 10 photos to ensure they're spread out
+        const FIXED_POSITIONS = [
+            // Top row - spread across
+            { left: 5, top: 5, rotation: -8, scale: 1.1 },
+            { left: 25, top: 8, rotation: 5, scale: 0.9 },
+            { left: 45, top: 6, rotation: -12, scale: 1.05 },
+            { left: 65, top: 10, rotation: 3, scale: 0.95 },
+            { left: 85, top: 7, rotation: -5, scale: 1.0 },
+            
+            // Bottom row - spread across
+            { left: 10, top: 65, rotation: 10, scale: 0.95 },
+            { left: 30, top: 70, rotation: -7, scale: 1.1 },
+            { left: 50, top: 68, rotation: 8, scale: 0.9 },
+            { left: 70, top: 72, rotation: -10, scale: 1.05 },
+            { left: 90, top: 66, rotation: 6, scale: 0.98 }
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            codeInput.focus();
+            
+            // Set up event listeners
+            verifyBtn.addEventListener('click', verifyCode);
+            codeInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyCode();
+                }
+            });
+            
+            continueBtn.addEventListener('click', showMessage);
+            revealBtn.addEventListener('click', showMessage);
+            exitBtn.addEventListener('click', function() {
+                messageOverlay.style.display = 'none';
+            });
+            
+            closeFullscreen.addEventListener('click', function() {
+                fullscreenPhoto.style.display = 'none';
+            });
+            
+            messageOverlay.addEventListener('click', function(e) {
+                if (e.target === messageOverlay) {
+                    messageOverlay.style.display = 'none';
+                }
+            });
+            
+            fullscreenPhoto.addEventListener('click', function(e) {
+                if (e.target === fullscreenPhoto) {
+                    fullscreenPhoto.style.display = 'none';
+                }
+            });
+        });
+
+        // Create scattered photos with well-spread positions
+        function createScatteredPhotos() {
+            scatteredPhotos.innerHTML = '';
+            
+            PHOTO_URLS.forEach((url, index) => {
+                const position = FIXED_POSITIONS[index];
+                
+                const photo = document.createElement('div');
+                photo.className = 'floating-photo';
+                
+                // Set pre-defined position
+                photo.style.left = `${position.left}%`;
+                photo.style.top = `${position.top}%`;
+                photo.style.setProperty('--initial-rotation', `${position.rotation}deg`);
+                
+                // Random animation timing so they don't all move together
+                const delay = Math.random() * 2;
+                const duration = 4 + Math.random() * 3;
+                photo.style.animation = `floatPhoto ${duration}s ease-in-out ${delay}s infinite`;
+                photo.style.transform = `rotate(${position.rotation}deg) scale(${position.scale})`;
+                
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = `Memory ${index + 1}`;
+                img.loading = 'lazy';
+                img.style.filter = 'brightness(1.05) contrast(1.05)'; // Enhanced visibility
+                
+                const caption = document.createElement('div');
+                caption.className = 'photo-caption';
+                caption.textContent = PHOTO_CAPTIONS[index] || `Memory ${index + 1}`;
+                
+                photo.appendChild(img);
+                photo.appendChild(caption);
+                scatteredPhotos.appendChild(photo);
+                
+                photo.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    fullscreenImg.src = url;
+                    fullscreenPhoto.style.display = 'flex';
+                });
+            });
+        }
+
+        // Create particles
+        function createParticles() {
+            particlesContainer.innerHTML = '';
+            for (let i = 0; i < 30; i++) { // Fewer particles so they don't obscure photos
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = `${Math.random() * 3 + 1}px`; // Smaller particles
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particle.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                particle.style.opacity = '0.6'; // More transparent
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Create confetti
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.width = `${Math.random() * 8 + 4}px`;
+                confetti.style.height = confetti.style.width;
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Create hearts
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+
+        // Verify code - NO COUNTDOWN, direct access
+        function verifyCode() {
+            const enteredCode = codeInput.value.trim();
+            
+            if (enteredCode === ACCESS_CODE) {
+                errorMessage.style.display = 'none';
+                
+                // Hide access screen
+                accessScreen.classList.add('hidden');
+                
+                // Directly show main content - NO TIMER
+                setTimeout(() => {
+                    accessScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    
+                    // Create effects with spread out positions
+                    createScatteredPhotos();
+                    createParticles();
+                    createConfetti();
+                    createHearts();
+                    
+                    // Show buttons with delay
+                    setTimeout(() => {
+                        continueBtn.style.display = 'block';
+                        revealBtn.style.display = 'block';
+                    }, 800);
+                }, 500);
+                
+            } else {
+                errorMessage.style.display = 'block';
+                codeInput.value = '';
+                codeInput.focus();
+                
+                // Shake effect
+                accessScreen.style.animation = 'none';
+                setTimeout(() => {
+                    accessScreen.style.animation = 'shake 0.5s ease';
+                }, 10);
+            }
+        }
+
+        // Show message
+        function showMessage() {
+            messageOverlay.style.display = 'flex';
+            createConfetti();
+            createHearts();
+        }
+
+        // Debug: Allow easy access for testing
+        console.log("Password is: HEMA210903");
+        console.log("No countdown - direct access after password");
+        console.log("Photos are pre-positioned to be spread out and visible");
+        
+        // Easter egg for quick access
+        document.addEventListener('keydown', function(e) {
+            if (e.key.toUpperCase() === 'H' && e.ctrlKey) {
+                codeInput.value = ACCESS_CODE;
+                verifyCode();
+            }
+        });
+    </script>
+</body>
+</html>
