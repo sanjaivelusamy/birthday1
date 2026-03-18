@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
+    <title>Happy Birthday Samyu! 🎉</title>
     <style>
         * {
             margin: 0;
@@ -200,7 +200,7 @@
             color: white;
             font-size: 0.9rem;
             text-align: center;
-            opacity: 0.8; /* Always visible */
+            opacity: 0.8;
             transition: opacity 0.3s ease;
             font-weight: bold;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
@@ -241,12 +241,17 @@
             max-width: 900px;
             margin: 0 auto;
             text-align: center;
-            background: rgba(0, 0, 0, 0.3); /* More transparent */
+            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
             border-radius: 30px;
             padding: 50px;
             border: 2px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
         }
 
         .main-title {
@@ -277,35 +282,67 @@
             font-weight: 300;
         }
 
-        #reveal-btn {
+        .buttons-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        #continue-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.5);
+            font-weight: bold;
             display: none;
+            animation: bounceIn 1s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            min-width: 320px;
+        }
+
+        #reveal-btn {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             border: none;
-            padding: 22px 60px;
-            font-size: 1.6rem;
+            padding: 20px 60px;
+            font-size: 1.5rem;
             color: white;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5);
             font-weight: bold;
-            letter-spacing: 1px;
-            animation: fadeIn 1.5s ease;
-            position: relative;
-            z-index: 20;
-            margin-top: 30px;
+            display: none;
+            animation: bounceIn 1s ease;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            min-width: 320px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { transform: scale(1.1); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        #continue-btn:hover, #reveal-btn:hover {
+            transform: translateY(-8px) scale(1.08);
+            filter: brightness(1.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        #continue-btn:hover {
+            box-shadow: 0 20px 50px rgba(79, 172, 254, 0.7);
         }
 
         #reveal-btn:hover {
-            transform: translateY(-8px) scale(1.08);
             box-shadow: 0 20px 50px rgba(245, 87, 108, 0.7);
-            border-color: rgba(255, 255, 255, 0.6);
         }
 
         /* Message Overlay */
@@ -385,20 +422,6 @@
             margin-bottom: 30px;
         }
 
-        .video-container {
-            margin: 40px 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .video-container video {
-            width: 100%;
-            display: block;
-            max-height: 450px;
-        }
-
         .signature {
             text-align: right;
             font-style: italic;
@@ -406,6 +429,16 @@
             font-size: 1.3rem;
             color: #fff;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .sun-emoji {
+            display: inline-block;
+            animation: sunRotate 3s infinite linear;
+        }
+
+        @keyframes sunRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* Fullscreen Photo Modal */
@@ -497,49 +530,9 @@
             }
         }
 
-        /* Continue Button */
-        .continue-container {
-            margin-top: 40px;
-        }
-
-        #continue-btn {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            border: none;
-            padding: 20px 60px;
-            font-size: 1.5rem;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.5);
-            font-weight: bold;
+        /* Hidden audio element */
+        #birthday-audio {
             display: none;
-            animation: bounceIn 1s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        @keyframes bounceIn {
-            0% { opacity: 0; transform: scale(0.3); }
-            50% { transform: scale(1.1); }
-            70% { transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        #continue-btn:hover {
-            transform: translateY(-8px) scale(1.08);
-            box-shadow: 0 20px 50px rgba(79, 172, 254, 0.7);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Emoji in tagline */
-        .sun-emoji {
-            display: inline-block;
-            animation: sunRotate 3s infinite linear;
-        }
-
-        @keyframes sunRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         @media (max-width: 768px) {
@@ -569,14 +562,16 @@
                 line-height: 1.8;
             }
             
-            #reveal-btn, #continue-btn {
+            #continue-btn, #reveal-btn {
                 padding: 18px 40px;
                 font-size: 1.3rem;
+                min-width: 260px;
             }
             
             .content-wrapper {
                 padding: 40px 25px;
                 margin: 20px;
+                min-height: 50vh;
             }
         }
 
@@ -602,10 +597,24 @@
             .access-box h2 {
                 font-size: 1.8rem;
             }
+
+            #continue-btn, #reveal-btn {
+                min-width: 220px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Hidden Audio for Happy Birthday Song - Now using the classic version -->
+    <audio id="birthday-audio" loop preload="auto">
+        <!-- Classic "Happy Birthday" song from reliable sources -->
+        <source src="https://actions.google.com/sounds/v1/holidays/happy_birthday_to_you.ogg" type="audio/ogg">
+        <source src="https://actions.google.com/sounds/v1/holidays/happy_birthday_to_you.mp3" type="audio/mpeg">
+        <!-- Additional backup sources in case the first ones fail -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Access Code Screen -->
     <div id="access-screen">
         <div class="access-box">
@@ -613,7 +622,7 @@
             <p>Enter the special code to unlock the birthday surprise!</p>
             <input type="password" id="code-input" placeholder="Enter birthday code..." maxlength="20">
             <button id="verify-btn">Unlock Surprise</button>
-            <div id="error-message" class="error-message">Incorrect code! Try "HEMA210903"</div>
+            <div id="error-message" class="error-message">Incorrect code! Try again</div>
         </div>
     </div>
 
@@ -622,41 +631,44 @@
         <div class="scattered-photos" id="scattered-photos"></div>
         <div class="particles" id="particles-container"></div>
         <div class="content-wrapper">
-            <h1 class="main-title">Happy Birthday!</h1>
+            <h1 class="main-title">Happy Birthday Samyu! 🎉</h1>
             <p class="tagline">This special day is all about YOU! <span class="sun-emoji">🌤</span></p>
-            <div class="continue-container">
-                <button id="continue-btn">Continue to Message</button>
+            <div class="buttons-center">
+                <button id="continue-btn">Read Your Message 💌</button>
+                <button id="reveal-btn">Happy Birthday 🎂</button>
             </div>
-            <button id="reveal-btn">Click for Your Special Message</button>
         </div>
     </div>
 
-    <!-- Message Overlay -->
+    <!-- Message Overlay with Personalized Content -->
     <div class="message-overlay" id="message-overlay">
         <div class="message-box">
             <button class="exit-btn" id="exit-btn">×</button>
-            <h2 class="message-heading">To The Most Amazing Person 🎂</h2>
+            <h2 class="message-heading">To The Most Amazing Samyu 🎂💖</h2>
             <div class="letter-content">
-                <p>Dear Special One,</p>
-                
-                <p>On this wonderful day, I want you to know how incredibly special you are. Your birthday marks another year of your amazing journey, and I feel so grateful to be part of it.</p>
-                
-                <div class="video-container">
-                    <video controls>
-                        <source src="https://github.com/sanjaivelusamy/birthday1/blob/main/VID_20251130_194854.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                
-                <p>You bring so much joy, laughter, and light into the world. Your kindness touches everyone around you, and your spirit inspires those lucky enough to know you.</p>
-                
-                <p>Today is about celebrating YOU - all your dreams, your achievements, and the wonderful person you've become. May this year bring you endless happiness, success in all your endeavors, and dreams that soar higher than ever before.</p>
-                
-                <p>Remember that you are loved, valued, and appreciated more than words can express. Here's to making this birthday and the coming year absolutely unforgettable!</p>
+                <p>Many more happy returns of the day Samyu 🎉💖</p>
+
+                <p>I don't know how we become friends but in the short period of the time we become a good friends 🤝✨</p>
+
+                <p>First first naa unna blood camp la dhan meet panna and adhu dhan yenaku first event in our club 🩸🏕️ Starting la lam naa avalova yaru kudayum pesa maten 🙈 and adhuku aparam yelarum konjam konjam aa intro anaga adhula nii oru allu 😊</p>
+
+                <p>Starting nii romba rugged ana person nu nenachen 😅 because apalam nii oru parva kovama papiye pathale sema bayama irrukum 😳🔥 and nii takunu adichiduva yedhavadhu sollita nu nenachu konjam nalla pesama irrudhen 😬</p>
+
+                <p>Adhuku apram event kaga konjam konjam pesa start panna apa dhan therinjudhu nii yevalo sweet ana person nu 🍭💗 and apa dhan therinjudu nii veliya rugged ana person and ulla innum kutty kulanthai nu 🧸🥹</p>
+
+                <p>Idhu varikum we just like colleagues, idhuku aparam nama club side la irrundhu trip ponom 🚌🌄 and anga dhan we came to know each other and we became nalla friends 💫👫</p>
+
+                <p>Idhuku aparam dhan unnoda cuteness lam yenaku therinju 😍✨ and cutest person I have ever met 💖💯</p>
+
+                <p>Idhuku aparam dhan theriyum nii oru foodie nu 🍔🍟 but enna konjam selective foodie 😌 not like other foodie, nalla selective ana foods and snacks nalla sapuduva 🍫🍿</p>
+
+                <p>Recent days aa dhan note panna ipa lam nii romba kovam paduradhu illa 😶 and i am missing it 😭💔 nii kovam padum bodhu oru look kudupa la adhu nalla cute irrukum 😤👉👈 adha romba miss pannuren 🥺💭</p>
+
+                <p>and un kita puduchadhey unnoda indha cuteness dhan 💖✨ idha yarukagavum vidadha 🫶💫</p>
                 
                 <div class="signature">
-                    <p>With all my love and best wishes,</p>
-                    <p>🎉 Your Biggest Fan 🎉</p>
+                    <p>With lots of love and best wishes,</p>
+                    <p>🎉 Sanjai 🎉</p>
                 </div>
             </div>
         </div>
@@ -669,12 +681,12 @@
     </div>
 
     <script>
-        // Access Code Configuration
-        const ACCESS_CODE = "HEMA210903";
+        // Access Code Configuration - UPDATED to "Sam190304"
+        const ACCESS_CODE = "Sam190304";
         
-        // Photo URLs - Use your own images here
+        // Photo URLs and Captions
         const PHOTO_URLS = [
-            "https://github.com/sanjaivelusamy/birthday1/blob/main/Screenshot%20(4).png?raw=true",
+            "https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
             "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
             "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
             "https://images.unsplash.com/photo-1529251333259-d36cccaf22ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
@@ -714,17 +726,15 @@
         const fullscreenImg = document.getElementById('fullscreen-img');
         const closeFullscreen = document.querySelector('.close-fullscreen');
         const particlesContainer = document.getElementById('particles-container');
+        const birthdayAudio = document.getElementById('birthday-audio');
 
-        // Pre-defined positions for 10 photos to ensure they're spread out
+        // Pre-defined positions for main page
         const FIXED_POSITIONS = [
-            // Top row - spread across
             { left: 5, top: 5, rotation: -8, scale: 1.1 },
             { left: 25, top: 8, rotation: 5, scale: 0.9 },
             { left: 45, top: 6, rotation: -12, scale: 1.05 },
             { left: 65, top: 10, rotation: 3, scale: 0.95 },
             { left: 85, top: 7, rotation: -5, scale: 1.0 },
-            
-            // Bottom row - spread across
             { left: 10, top: 65, rotation: 10, scale: 0.95 },
             { left: 30, top: 70, rotation: -7, scale: 1.1 },
             { left: 50, top: 68, rotation: 8, scale: 0.9 },
@@ -736,67 +746,437 @@
         document.addEventListener('DOMContentLoaded', function() {
             codeInput.focus();
             
-            // Set up event listeners
             verifyBtn.addEventListener('click', verifyCode);
             codeInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    verifyCode();
-                }
+                if (e.key === 'Enter') verifyCode();
             });
             
-            continueBtn.addEventListener('click', showMessage);
-            revealBtn.addEventListener('click', showMessage);
+            continueBtn.addEventListener('click', function() {
+                messageOverlay.style.display = 'flex';
+                createConfetti();
+                createHearts();
+            });
+            
+            revealBtn.addEventListener('click', function() {
+                playBirthdayMusic();
+                openRandomPhotoPage();
+            });
+            
             exitBtn.addEventListener('click', function() {
                 messageOverlay.style.display = 'none';
+            });
+            
+            messageOverlay.addEventListener('click', function(e) {
+                if (e.target === messageOverlay) messageOverlay.style.display = 'none';
             });
             
             closeFullscreen.addEventListener('click', function() {
                 fullscreenPhoto.style.display = 'none';
             });
             
-            messageOverlay.addEventListener('click', function(e) {
-                if (e.target === messageOverlay) {
-                    messageOverlay.style.display = 'none';
-                }
-            });
-            
             fullscreenPhoto.addEventListener('click', function(e) {
-                if (e.target === fullscreenPhoto) {
-                    fullscreenPhoto.style.display = 'none';
-                }
+                if (e.target === fullscreenPhoto) fullscreenPhoto.style.display = 'none';
             });
         });
 
-        // Create scattered photos with well-spread positions
+        function playBirthdayMusic() {
+            birthdayAudio.volume = 0.5;
+            birthdayAudio.currentTime = 0;
+            const playPromise = birthdayAudio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Audio play failed: ", error);
+                });
+            }
+        }
+
+        function openRandomPhotoPage() {
+            const randomPage = window.open('', '_blank');
+            
+            const pageHTML = `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Happy Birthday Samyu! - Random Photos</title>
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        
+                        body {
+                            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+                            min-height: 100vh;
+                            position: relative;
+                            overflow-x: hidden;
+                        }
+                        
+                        .random-photo-container {
+                            position: relative;
+                            width: 100%;
+                            min-height: 100vh;
+                            padding: 20px;
+                        }
+                        
+                        .random-photo {
+                            position: absolute;
+                            width: 220px;
+                            height: 280px;
+                            border-radius: 20px;
+                            overflow: hidden;
+                            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+                            cursor: pointer;
+                            transition: all 0.4s ease;
+                            border: 5px solid rgba(255, 255, 255, 0.5);
+                            animation: fadeIn 1s ease;
+                            background: white;
+                        }
+                        
+                        .random-photo:hover {
+                            transform: scale(1.3) rotate(5deg) !important;
+                            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
+                            z-index: 1000;
+                            border-color: rgba(255, 215, 0, 0.8);
+                        }
+                        
+                        .random-photo img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                        
+                        .photo-caption {
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+                            padding: 15px;
+                            color: white;
+                            font-size: 1rem;
+                            text-align: center;
+                            font-weight: bold;
+                            text-shadow: 1px 1px 3px black;
+                        }
+                        
+                        .close-btn {
+                            position: fixed;
+                            top: 20px;
+                            right: 30px;
+                            background: rgba(255, 255, 255, 0.2);
+                            backdrop-filter: blur(10px);
+                            border: 2px solid rgba(255, 255, 255, 0.3);
+                            color: white;
+                            font-size: 2.5rem;
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            z-index: 2000;
+                            transition: all 0.3s ease;
+                        }
+                        
+                        .close-btn:hover {
+                            background: rgba(255, 255, 255, 0.4);
+                            transform: rotate(90deg) scale(1.1);
+                        }
+                        
+                        .title {
+                            position: fixed;
+                            top: 20px;
+                            left: 20px;
+                            color: white;
+                            font-size: 2rem;
+                            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+                            background: rgba(0,0,0,0.3);
+                            backdrop-filter: blur(5px);
+                            padding: 10px 25px;
+                            border-radius: 50px;
+                            border: 1px solid rgba(255,255,255,0.2);
+                            z-index: 1500;
+                            font-family: 'Georgia', serif;
+                        }
+                        
+                        /* Fullscreen modal for new page */
+                        .fullscreen-modal {
+                            display: none;
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: rgba(0, 0, 0, 0.98);
+                            z-index: 3000;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                        
+                        .fullscreen-modal img {
+                            max-width: 95%;
+                            max-height: 95%;
+                            border-radius: 15px;
+                            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+                            border: 3px solid rgba(255, 255, 255, 0.3);
+                        }
+                        
+                        .modal-close {
+                            position: absolute;
+                            top: 35px;
+                            right: 45px;
+                            font-size: 3.5rem;
+                            color: white;
+                            cursor: pointer;
+                            transition: transform 0.3s ease;
+                            z-index: 3001;
+                            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+                            background: rgba(0,0,0,0.5);
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        
+                        .modal-close:hover {
+                            transform: rotate(90deg) scale(1.2);
+                            background: rgba(0,0,0,0.7);
+                        }
+                        
+                        @keyframes fadeIn {
+                            from { opacity: 0; transform: scale(0.8); }
+                            to { opacity: 1; transform: scale(1); }
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .random-photo {
+                                width: 150px;
+                                height: 200px;
+                            }
+                            .title {
+                                font-size: 1.2rem;
+                                top: 10px;
+                                left: 10px;
+                                padding: 8px 15px;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="title">🎂 Happy Birthday Samyu! 🎂</div>
+                    <div class="close-btn" onclick="window.close()">×</div>
+                    <div class="random-photo-container" id="random-container"></div>
+                    
+                    <!-- Fullscreen Modal for this page -->
+                    <div class="fullscreen-modal" id="page-fullscreen">
+                        <span class="modal-close" id="modal-close-btn">×</span>
+                        <img id="modal-image" src="" alt="Fullscreen">
+                    </div>
+                    
+                    <script>
+                        const photoURLs = ${JSON.stringify(PHOTO_URLS)};
+                        const photoCaptions = ${JSON.stringify(PHOTO_CAPTIONS)};
+                        
+                        const container = document.getElementById('random-container');
+                        const fullscreenModal = document.getElementById('page-fullscreen');
+                        const modalImage = document.getElementById('modal-image');
+                        const modalClose = document.getElementById('modal-close-btn');
+                        
+                        // Close modal when clicking close button or outside
+                        modalClose.addEventListener('click', function() {
+                            fullscreenModal.style.display = 'none';
+                        });
+                        
+                        fullscreenModal.addEventListener('click', function(e) {
+                            if (e.target === fullscreenModal) {
+                                fullscreenModal.style.display = 'none';
+                            }
+                        });
+                        
+                        const photoWidth = 220;
+                        const photoHeight = 280;
+                        
+                        // Store positions to check for collisions
+                        const positions = [];
+                        
+                        function getRandomPosition() {
+                            const viewportWidth = window.innerWidth;
+                            const viewportHeight = window.innerHeight;
+                            
+                            const maxLeft = viewportWidth - photoWidth - 20;
+                            const maxTop = viewportHeight - photoHeight - 20;
+                            
+                            const left = Math.random() * maxLeft;
+                            const top = Math.random() * maxTop;
+                            const rotation = (Math.random() * 30 - 15);
+                            const scale = 0.8 + Math.random() * 0.4;
+                            
+                            return { left, top, rotation, scale };
+                        }
+                        
+                        function checkCollision(newPos, existingPositions) {
+                            const margin = 30;
+                            
+                            for (let i = 0; i < existingPositions.length; i++) {
+                                const pos = existingPositions[i];
+                                
+                                const newLeft = newPos.left - margin;
+                                const newRight = newPos.left + photoWidth + margin;
+                                const newTop = newPos.top - margin;
+                                const newBottom = newPos.top + photoHeight + margin;
+                                
+                                const oldLeft = pos.left - margin;
+                                const oldRight = pos.left + photoWidth + margin;
+                                const oldTop = pos.top - margin;
+                                const oldBottom = pos.top + photoHeight + margin;
+                                
+                                if (newLeft < oldRight && 
+                                    newRight > oldLeft && 
+                                    newTop < oldBottom && 
+                                    newBottom > oldTop) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }
+                        
+                        // Generate positions for all photos with collision avoidance
+                        for (let i = 0; i < photoURLs.length; i++) {
+                            let attempts = 0;
+                            const maxAttempts = 500;
+                            let positionFound = false;
+                            
+                            while (!positionFound && attempts < maxAttempts) {
+                                const newPos = getRandomPosition();
+                                
+                                if (!checkCollision(newPos, positions)) {
+                                    positions.push(newPos);
+                                    positionFound = true;
+                                }
+                                
+                                attempts++;
+                            }
+                            
+                            if (!positionFound) {
+                                positions.push(getRandomPosition());
+                            }
+                        }
+                        
+                        // Create photos with the calculated positions
+                        positions.forEach((pos, index) => {
+                            const photoDiv = document.createElement('div');
+                            photoDiv.className = 'random-photo';
+                            photoDiv.style.left = pos.left + 'px';
+                            photoDiv.style.top = pos.top + 'px';
+                            photoDiv.style.transform = 'rotate(' + pos.rotation + 'deg) scale(' + pos.scale + ')';
+                            
+                            const img = document.createElement('img');
+                            img.src = photoURLs[index];
+                            img.alt = photoCaptions[index] || 'Birthday memory';
+                            
+                            const caption = document.createElement('div');
+                            caption.className = 'photo-caption';
+                            caption.textContent = photoCaptions[index];
+                            
+                            photoDiv.appendChild(img);
+                            photoDiv.appendChild(caption);
+                            container.appendChild(photoDiv);
+                            
+                            // Click handler for photo - opens in modal on same page
+                            photoDiv.addEventListener('click', function() {
+                                modalImage.src = photoURLs[index];
+                                fullscreenModal.style.display = 'flex';
+                            });
+                        });
+                        
+                        function createConfetti() {
+                            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+                            for (let i = 0; i < 100; i++) {
+                                const confetti = document.createElement('div');
+                                confetti.style.position = 'fixed';
+                                confetti.style.width = (Math.random() * 8 + 4) + 'px';
+                                confetti.style.height = confetti.style.width;
+                                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                                confetti.style.left = Math.random() * 100 + '%';
+                                confetti.style.top = '-10px';
+                                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                                confetti.style.zIndex = '9999';
+                                confetti.style.animation = 'fall ' + (Math.random() * 3 + 2) + 's linear forwards';
+                                confetti.style.opacity = '0.8';
+                                document.body.appendChild(confetti);
+                                
+                                setTimeout(() => confetti.remove(), 5000);
+                            }
+                        }
+                        
+                        const style = document.createElement('style');
+                        style.textContent = \`
+                            @keyframes fall {
+                                0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+                                100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+                            }
+                            @keyframes floatUp {
+                                0% { transform: translateY(0) scale(0.5); opacity: 0.7; }
+                                100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+                            }
+                        \`;
+                        document.head.appendChild(style);
+                        
+                        createConfetti();
+                        
+                        for (let i = 0; i < 20; i++) {
+                            const heart = document.createElement('div');
+                            heart.innerHTML = '❤️';
+                            heart.style.position = 'fixed';
+                            heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                            heart.style.left = Math.random() * 100 + '%';
+                            heart.style.bottom = '0';
+                            heart.style.animation = 'floatUp ' + (Math.random() * 3 + 3) + 's ease-out forwards';
+                            heart.style.zIndex = '9998';
+                            heart.style.opacity = '0.7';
+                            heart.style.filter = 'drop-shadow(0 0 5px hotpink)';
+                            document.body.appendChild(heart);
+                            
+                            setTimeout(() => heart.remove(), 5000);
+                        }
+                    <\/script>
+                </body>
+                </html>
+            `;
+            
+            randomPage.document.write(pageHTML);
+            randomPage.document.close();
+        }
+
         function createScatteredPhotos() {
             scatteredPhotos.innerHTML = '';
-            
             PHOTO_URLS.forEach((url, index) => {
                 const position = FIXED_POSITIONS[index];
-                
                 const photo = document.createElement('div');
                 photo.className = 'floating-photo';
-                
-                // Set pre-defined position
-                photo.style.left = `${position.left}%`;
-                photo.style.top = `${position.top}%`;
-                photo.style.setProperty('--initial-rotation', `${position.rotation}deg`);
-                
-                // Random animation timing so they don't all move together
+                photo.style.left = position.left + '%';
+                photo.style.top = position.top + '%';
+                photo.style.setProperty('--initial-rotation', position.rotation + 'deg');
                 const delay = Math.random() * 2;
                 const duration = 4 + Math.random() * 3;
-                photo.style.animation = `floatPhoto ${duration}s ease-in-out ${delay}s infinite`;
-                photo.style.transform = `rotate(${position.rotation}deg) scale(${position.scale})`;
+                photo.style.animation = 'floatPhoto ' + duration + 's ease-in-out ' + delay + 's infinite';
+                photo.style.transform = 'rotate(' + position.rotation + 'deg) scale(' + position.scale + ')';
                 
                 const img = document.createElement('img');
                 img.src = url;
-                img.alt = `Memory ${index + 1}`;
+                img.alt = 'Memory ' + (index + 1);
                 img.loading = 'lazy';
-                img.style.filter = 'brightness(1.05) contrast(1.05)'; // Enhanced visibility
                 
                 const caption = document.createElement('div');
                 caption.className = 'photo-caption';
-                caption.textContent = PHOTO_CAPTIONS[index] || `Memory ${index + 1}`;
+                caption.textContent = PHOTO_CAPTIONS[index];
                 
                 photo.appendChild(img);
                 photo.appendChild(caption);
@@ -810,91 +1190,73 @@
             });
         }
 
-        // Create particles
         function createParticles() {
             particlesContainer.innerHTML = '';
-            for (let i = 0; i < 30; i++) { // Fewer particles so they don't obscure photos
+            for (let i = 0; i < 30; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                particle.style.width = `${Math.random() * 3 + 1}px`; // Smaller particles
+                particle.style.width = (Math.random() * 3 + 1) + 'px';
                 particle.style.height = particle.style.width;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 5 + 5}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                particle.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
-                particle.style.opacity = '0.6'; // More transparent
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.background = 'hsl(' + Math.random() * 360 + ', 100%, 70%)';
+                particle.style.opacity = '0.6';
                 particlesContainer.appendChild(particle);
             }
         }
 
-        // Create confetti
         function createConfetti() {
             const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
             for (let i = 0; i < 100; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
-                confetti.style.left = `${Math.random() * 100}%`;
-                confetti.style.width = `${Math.random() * 8 + 4}px`;
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.width = (Math.random() * 8 + 4) + 'px';
                 confetti.style.height = confetti.style.width;
                 confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
                 confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
                 document.body.appendChild(confetti);
-                
                 setTimeout(() => confetti.remove(), 5000);
             }
         }
 
-        // Create hearts
         function createHearts() {
             for (let i = 0; i < 20; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 heart.innerHTML = '❤️';
-                heart.style.left = `${Math.random() * 100}%`;
-                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                heart.style.animationDelay = `${Math.random() * 2}s`;
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
                 document.body.appendChild(heart);
-                
                 setTimeout(() => heart.remove(), 5000);
             }
         }
 
-        // Verify code - NO COUNTDOWN, direct access
         function verifyCode() {
             const enteredCode = codeInput.value.trim();
-            
             if (enteredCode === ACCESS_CODE) {
                 errorMessage.style.display = 'none';
-                
-                // Hide access screen
                 accessScreen.classList.add('hidden');
-                
-                // Directly show main content - NO TIMER
                 setTimeout(() => {
                     accessScreen.style.display = 'none';
                     mainContent.style.display = 'block';
-                    
-                    // Create effects with spread out positions
                     createScatteredPhotos();
                     createParticles();
                     createConfetti();
                     createHearts();
-                    
-                    // Show buttons with delay
                     setTimeout(() => {
                         continueBtn.style.display = 'block';
                         revealBtn.style.display = 'block';
                     }, 800);
                 }, 500);
-                
             } else {
                 errorMessage.style.display = 'block';
                 codeInput.value = '';
                 codeInput.focus();
-                
-                // Shake effect
                 accessScreen.style.animation = 'none';
                 setTimeout(() => {
                     accessScreen.style.animation = 'shake 0.5s ease';
@@ -902,19 +1264,8 @@
             }
         }
 
-        // Show message
-        function showMessage() {
-            messageOverlay.style.display = 'flex';
-            createConfetti();
-            createHearts();
-        }
-
-        // Debug: Allow easy access for testing
-        console.log("Password is: HEMA210903");
-        console.log("No countdown - direct access after password");
-        console.log("Photos are pre-positioned to be spread out and visible");
+        console.log("New Access Code: Sam190304 | Song changed to classic Happy Birthday");
         
-        // Easter egg for quick access
         document.addEventListener('keydown', function(e) {
             if (e.key.toUpperCase() === 'H' && e.ctrlKey) {
                 codeInput.value = ACCESS_CODE;
