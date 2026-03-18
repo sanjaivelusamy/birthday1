@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Sam! 🎉</title>
     <style>
         * {
@@ -18,7 +18,6 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            -webkit-tap-highlight-color: transparent;
         }
 
         /* Access Code Screen */
@@ -34,7 +33,6 @@
             align-items: center;
             z-index: 2000;
             transition: opacity 0.8s ease, visibility 0.8s ease;
-            padding: 20px;
         }
 
         #access-screen.hidden {
@@ -46,39 +44,38 @@
         .access-box {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
-            padding: clamp(30px, 8vw, 50px) clamp(20px, 6vw, 40px);
+            padding: 50px 40px;
             border-radius: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             text-align: center;
             max-width: 450px;
-            width: 100%;
+            width: 90%;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .access-box h2 {
-            font-size: clamp(1.5rem, 6vw, 2rem);
-            margin-bottom: clamp(10px, 3vw, 15px);
+            font-size: 2rem;
+            margin-bottom: 15px;
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            line-height: 1.3;
         }
 
         .access-box p {
-            margin-bottom: clamp(15px, 4vw, 25px);
+            margin-bottom: 25px;
             opacity: 0.9;
-            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            font-size: 1.1rem;
         }
 
         #code-input {
             width: 100%;
-            padding: clamp(12px, 3.5vw, 15px);
+            padding: 15px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
-            font-size: clamp(16px, 4vw, 18px);
+            font-size: 18px;
             text-align: center;
-            margin-bottom: clamp(15px, 4vw, 20px);
+            margin-bottom: 20px;
             letter-spacing: 2px;
             transition: all 0.3s ease;
         }
@@ -95,18 +92,16 @@
 
         #verify-btn {
             width: 100%;
-            padding: clamp(12px, 3.5vw, 15px);
+            padding: 15px;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             border: none;
             border-radius: 10px;
             color: white;
-            font-size: clamp(16px, 4vw, 18px);
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            -webkit-appearance: none;
-            appearance: none;
         }
 
         #verify-btn:hover {
@@ -132,7 +127,7 @@
             75% { transform: translateX(10px); }
         }
 
-        /* Timer Screen */
+        /* Timer Screen - New Style */
         #timer-screen {
             position: fixed;
             top: 0;
@@ -145,23 +140,17 @@
             align-items: center;
             z-index: 2500;
             flex-direction: column;
-            padding: 15px;
-            overflow-y: auto;
         }
 
         .timer-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             border-radius: 30px;
-            padding: clamp(20px, 5vw, 50px) clamp(15px, 4vw, 60px);
+            padding: 50px 60px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
             animation: cardPulse 2s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 1200px;
         }
 
         @keyframes cardPulse {
@@ -171,25 +160,24 @@
 
         .timer-main {
             display: flex;
-            gap: clamp(10px, 2vw, 40px);
-            margin-bottom: clamp(15px, 4vw, 30px);
+            gap: 40px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .timer-block {
             text-align: center;
-            min-width: clamp(60px, 15vw, 120px);
-            flex: 1 1 auto;
+            min-width: 120px;
         }
 
         .timer-number {
-            font-size: clamp(2rem, 8vw, 5rem);
+            font-size: 5rem;
             font-weight: 800;
             color: #ff6b6b;
             text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
             line-height: 1;
-            margin-bottom: clamp(5px, 1.5vw, 10px);
+            margin-bottom: 10px;
             font-family: 'Arial Black', sans-serif;
             background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             -webkit-background-clip: text;
@@ -198,21 +186,19 @@
         }
 
         .timer-label {
-            font-size: clamp(0.7rem, 2.5vw, 1.2rem);
+            font-size: 1.2rem;
             text-transform: uppercase;
-            letter-spacing: clamp(1px, 0.5vw, 3px);
+            letter-spacing: 3px;
             color: rgba(255, 255, 255, 0.7);
             font-weight: 300;
-            white-space: nowrap;
         }
 
         .timer-message {
-            font-size: clamp(1rem, 4vw, 1.8rem);
+            font-size: 1.8rem;
             color: #fff;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            margin-top: 15px;
+            margin-top: 20px;
             animation: messageGlow 1.5s ease-in-out infinite;
-            line-height: 1.4;
         }
 
         @keyframes messageGlow {
@@ -221,65 +207,13 @@
         }
 
         .timer-sub {
-            font-size: clamp(0.8rem, 3vw, 1rem);
+            font-size: 1rem;
             color: rgba(255, 255, 255, 0.5);
             margin-top: 10px;
-            letter-spacing: clamp(1px, 0.5vw, 2px);
+            letter-spacing: 2px;
         }
 
-        /* Pop Number */
-        #pop-number {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            font-size: clamp(4rem, 20vw, 15rem);
-            font-weight: 900;
-            color: #ffd700;
-            text-shadow: 0 0 30px #ff6b6b, 0 0 60px #ff4500;
-            z-index: 3000;
-            opacity: 0;
-            transition: all 0.1s ease;
-            pointer-events: none;
-            white-space: nowrap;
-            animation: none;
-            text-align: center;
-            width: 100%;
-            line-height: 1.2;
-        }
-
-        @keyframes popOut {
-            0% {
-                transform: translate(-50%, -50%) scale(0);
-                opacity: 0;
-            }
-            20% {
-                transform: translate(-50%, -50%) scale(1.8);
-                opacity: 1;
-            }
-            40% {
-                transform: translate(-50%, -50%) scale(1.6);
-                opacity: 1;
-            }
-            60% {
-                transform: translate(-50%, -50%) scale(2);
-                opacity: 1;
-            }
-            80% {
-                transform: translate(-50%, -50%) scale(1.8);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(0);
-                opacity: 0;
-            }
-        }
-
-        .pop-active {
-            animation: popOut 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards !important;
-        }
-
-        /* Blast Animation */
+        /* Blast Animation for Main Content */
         @keyframes blastIn {
             0% {
                 opacity: 0;
@@ -307,8 +241,8 @@
             display: none;
             min-height: 100vh;
             position: relative;
-            padding: 20px 15px;
-            overflow-x: hidden;
+            padding: 40px 20px;
+            overflow: hidden;
         }
 
         .scattered-photos {
@@ -323,16 +257,16 @@
 
         .floating-photo {
             position: absolute;
-            width: min(140px, 30vw);
-            height: min(180px, 40vw);
+            width: 180px;
+            height: 240px;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
             transform-origin: center;
             pointer-events: auto;
-            border: 3px solid rgba(255, 255, 255, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.4);
             animation: floatPhoto 6s ease-in-out infinite;
             background: white;
         }
@@ -342,27 +276,23 @@
                 transform: translateY(0) rotate(var(--initial-rotation));
             }
             50% {
-                transform: translateY(-10px) rotate(calc(var(--initial-rotation) + 2deg));
+                transform: translateY(-15px) rotate(calc(var(--initial-rotation) + 2deg));
             }
         }
 
         .floating-photo:hover {
-            transform: scale(1.2) rotate(calc(var(--initial-rotation) + 5deg)) !important;
+            transform: scale(1.25) rotate(calc(var(--initial-rotation) + 5deg)) !important;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
             z-index: 100;
             animation: none;
             border-color: rgba(255, 255, 255, 0.8);
         }
 
-        .floating-photo:active {
-            transform: scale(1.15) rotate(calc(var(--initial-rotation) + 3deg)) !important;
-        }
-
         .floating-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
         .floating-photo:hover img {
@@ -375,14 +305,18 @@
             left: 0;
             right: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 8px 5px;
+            padding: 12px;
             color: white;
-            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+            font-size: 0.9rem;
             text-align: center;
-            opacity: 0.9;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
             font-weight: bold;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-            line-height: 1.3;
+        }
+
+        .floating-photo:hover .photo-caption {
+            opacity: 1;
         }
 
         .particles {
@@ -395,6 +329,21 @@
             pointer-events: none;
         }
 
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+
         .content-wrapper {
             position: relative;
             z-index: 10;
@@ -404,28 +353,27 @@
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
             border-radius: 30px;
-            padding: clamp(25px, 6vw, 50px) clamp(15px, 4vw, 50px);
+            padding: 50px;
             border: 2px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 50vh;
-            width: 100%;
+            min-height: 60vh;
         }
 
         .main-title {
-            font-size: clamp(2rem, 8vw, 4.5rem);
-            margin-bottom: clamp(15px, 4vw, 30px);
+            font-size: 4.5rem;
+            margin-bottom: 30px;
             background: linear-gradient(45deg, #ff6ec4, #7873f5, #4facfe, #00ff95);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradient 4s ease infinite;
+            text-shadow: none;
             filter: drop-shadow(0 0 25px rgba(127, 115, 245, 0.7));
-            line-height: 1.2;
         }
 
         @keyframes gradient {
@@ -435,49 +383,54 @@
         }
 
         .tagline {
-            font-size: clamp(1.2rem, 5vw, 2rem);
-            margin-bottom: clamp(25px, 6vw, 50px);
+            font-size: 2rem;
+            margin-bottom: 50px;
             color: #ffffff;
             font-style: italic;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
             font-weight: 300;
-            line-height: 1.4;
         }
 
         .buttons-center {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(12px, 3vw, 20px);
+            gap: 20px;
             width: 100%;
-        }
-
-        #continue-btn, #reveal-btn {
-            width: 100%;
-            max-width: 400px;
-            padding: clamp(15px, 4vw, 20px) clamp(20px, 6vw, 60px);
-            font-size: clamp(1.1rem, 4.5vw, 1.5rem);
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            display: none;
-            animation: bounceIn 1s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            -webkit-appearance: none;
-            appearance: none;
-            touch-action: manipulation;
         }
 
         #continue-btn {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             box-shadow: 0 15px 40px rgba(79, 172, 254, 0.5);
+            font-weight: bold;
+            display: none;
+            animation: bounceIn 1s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            min-width: 320px;
         }
 
         #reveal-btn {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5);
+            font-weight: bold;
+            display: none;
+            animation: bounceIn 1s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            min-width: 320px;
         }
 
         @keyframes bounceIn {
@@ -487,9 +440,18 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        #continue-btn:active, #reveal-btn:active {
-            transform: translateY(-4px) scale(1.05);
-            filter: brightness(1.2);
+        #continue-btn:hover, #reveal-btn:hover {
+            transform: translateY(-8px) scale(1.08);
+            filter: brightness(1.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        #continue-btn:hover {
+            box-shadow: 0 20px 50px rgba(79, 172, 254, 0.7);
+        }
+
+        #reveal-btn:hover {
+            box-shadow: 0 20px 50px rgba(245, 87, 108, 0.7);
         }
 
         /* Message Overlay */
@@ -500,28 +462,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.4s ease;
-            padding: 15px;
-            overflow-y: auto;
         }
 
         .message-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: clamp(25px, 6vw, 60px) clamp(15px, 4vw, 60px);
+            padding: 60px;
             border-radius: 30px;
             max-width: 750px;
-            width: 100%;
-            max-height: 90vh;
+            width: 90%;
+            max-height: 85vh;
             overflow-y: auto;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
             position: relative;
             animation: slideIn 0.5s ease;
             border: 2px solid rgba(255, 255, 255, 0.2);
-            -webkit-overflow-scrolling: touch;
         }
 
         @keyframes slideIn {
@@ -531,12 +490,12 @@
 
         .exit-btn {
             position: absolute;
-            top: 15px;
-            right: 20px;
+            top: 25px;
+            right: 30px;
             background: rgba(255, 255, 255, 0.25);
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             color: white;
             font-size: 2rem;
@@ -546,41 +505,37 @@
             align-items: center;
             justify-content: center;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            z-index: 10;
         }
 
-        .exit-btn:active {
+        .exit-btn:hover {
             background: rgba(255, 255, 255, 0.4);
             transform: rotate(90deg) scale(1.1);
         }
 
         .message-heading {
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            margin-bottom: clamp(20px, 5vw, 40px);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
             color: #fff;
             text-align: center;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            line-height: 1.3;
-            padding-right: 30px;
         }
 
         .letter-content {
-            line-height: 1.8;
+            line-height: 2;
             text-align: left;
-            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            font-size: 1.2rem;
             color: rgba(255, 255, 255, 0.95);
         }
 
         .letter-content p {
-            margin-bottom: 20px;
-            word-break: break-word;
+            margin-bottom: 30px;
         }
 
         .signature {
             text-align: right;
             font-style: italic;
-            margin-top: 30px;
-            font-size: clamp(1.1rem, 4vw, 1.3rem);
+            margin-top: 50px;
+            font-size: 1.3rem;
             color: #fff;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
         }
@@ -608,50 +563,48 @@
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.3s ease;
-            padding: 20px;
         }
 
         #fullscreen-photo img {
-            max-width: 100%;
-            max-height: 90%;
+            max-width: 95%;
+            max-height: 95%;
             border-radius: 15px;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
             border: 3px solid rgba(255, 255, 255, 0.3);
-            object-fit: contain;
         }
 
         .close-fullscreen {
             position: absolute;
-            top: max(20px, 5vh);
-            right: max(20px, 5vw);
-            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            top: 35px;
+            right: 45px;
+            font-size: 3.5rem;
             color: white;
             cursor: pointer;
             transition: transform 0.3s ease;
             z-index: 3001;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
             background: rgba(0, 0, 0, 0.5);
-            width: clamp(40px, 10vw, 60px);
-            height: clamp(40px, 10vw, 60px);
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .close-fullscreen:active {
+        .close-fullscreen:hover {
             transform: rotate(90deg) scale(1.2);
+            background: rgba(0, 0, 0, 0.7);
         }
 
-        /* Confetti */
+        /* Confetti Effect */
         .confetti {
             position: fixed;
-            width: clamp(8px, 2vw, 15px);
-            height: clamp(8px, 2vw, 15px);
+            width: 15px;
+            height: 15px;
             opacity: 0;
             animation: confettiFall linear forwards;
             z-index: 9999;
-            pointer-events: none;
         }
 
         @keyframes confettiFall {
@@ -668,12 +621,11 @@
         /* Heart Animation */
         .heart {
             position: absolute;
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-size: 2.5rem;
             color: #ff6b6b;
             opacity: 0;
             animation: heartFloat linear forwards;
             text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
-            pointer-events: none;
         }
 
         @keyframes heartFloat {
@@ -687,49 +639,106 @@
             }
         }
 
-        /* Hidden audio */
+        /* Hidden audio element */
         #birthday-audio {
             display: none;
         }
 
-        /* Landscape orientation adjustments */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .timer-main {
-                gap: 5px;
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 3rem;
             }
             
-            .timer-block {
-                min-width: 50px;
-            }
-            
-            .timer-number {
-                font-size: clamp(1.5rem, 5vh, 3rem);
+            .tagline {
+                font-size: 1.5rem;
             }
             
             .floating-photo {
-                width: 100px;
-                height: 130px;
+                width: 130px;
+                height: 180px;
             }
             
             .message-box {
+                padding: 40px 25px;
+            }
+            
+            .message-heading {
+                font-size: 2rem;
+            }
+            
+            .letter-content {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+            
+            #continue-btn, #reveal-btn {
+                padding: 18px 40px;
+                font-size: 1.3rem;
+                min-width: 260px;
+            }
+            
+            .content-wrapper {
+                padding: 40px 25px;
+                margin: 20px;
+                min-height: 50vh;
+            }
+
+            .timer-card {
                 padding: 30px 20px;
+                width: 90%;
+            }
+
+            .timer-main {
+                gap: 15px;
+            }
+
+            .timer-block {
+                min-width: 70px;
+            }
+
+            .timer-number {
+                font-size: 2.5rem;
+            }
+
+            .timer-label {
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+
+            .timer-message {
+                font-size: 1.2rem;
             }
         }
 
-        /* Small phones */
-        @media (max-width: 380px) {
-            .timer-label {
-                font-size: 0.6rem;
-                letter-spacing: 0.5px;
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.5rem;
             }
             
-            .timer-number {
+            .floating-photo {
+                width: 110px;
+                height: 150px;
+            }
+            
+            #code-input {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            .access-box {
+                padding: 40px 25px;
+            }
+            
+            .access-box h2 {
                 font-size: 1.8rem;
             }
-            
-            .photo-caption {
-                font-size: 0.6rem;
-                padding: 5px 3px;
+
+            #continue-btn, #reveal-btn {
+                min-width: 220px;
+            }
+
+            .timer-number {
+                font-size: 2rem;
             }
         }
     </style>
@@ -748,13 +757,13 @@
         <div class="access-box">
             <h2>🎂 Birthday Access 🎂</h2>
             <p>Enter the special code to unlock the birthday surprise!</p>
-            <input type="password" id="code-input" placeholder="Enter birthday code..." maxlength="20" inputmode="text">
+            <input type="password" id="code-input" placeholder="Enter birthday code..." maxlength="20">
             <button id="verify-btn">Unlock Surprise</button>
             <div id="error-message" class="error-message">Incorrect code! Try again</div>
         </div>
     </div>
 
-    <!-- Timer Screen -->
+    <!-- Timer Screen - Styled like the image -->
     <div id="timer-screen">
         <div class="timer-card">
             <div class="timer-main">
@@ -788,9 +797,6 @@
         </div>
     </div>
 
-    <!-- Pop Number Element -->
-    <div id="pop-number">22 🎂</div>
-
     <!-- Main Content -->
     <div id="main-content">
         <div class="scattered-photos" id="scattered-photos"></div>
@@ -805,7 +811,7 @@
         </div>
     </div>
 
-    <!-- Message Overlay -->
+    <!-- Message Overlay with Personalized Content -->
     <div class="message-overlay" id="message-overlay">
         <div class="message-box">
             <button class="exit-btn" id="exit-btn">×</button>
@@ -849,21 +855,27 @@
         // Access Code Configuration
         const ACCESS_CODE = "Sam190304";
         
-        // Target Date
-        const TARGET_DATE = new Date(2026, 2, 19, 0, 0, 0);
+        // ============================================
+        // TARGET DATE AND TIME FOR THE COUNTDOWN
+        // ============================================
+        // Set your target date here: Year, Month (0-11), Day, Hour, Minute, Second
+        // Example: March 19, 2026 at 12:00 AM = 2026, 2, 19, 0, 0, 0
+        const TARGET_DATE = new Date(2026, 2, 19, 00, 00, 0); // March 19, 2026 00:00:00
         
-        // Photo URLs (simplified for mobile performance)
+        // ============================================
+        // MAIN PAGE PHOTO COLLECTION (Your GitHub images)
+        // ============================================
         const PHOTO_URLS = [
-            "https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=400&q=80",
-            "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&q=80",
-            "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&q=80",
-            "https://images.unsplash.com/photo-1529251333259-d36cccaf22ea?w=400&q=80",
-            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
-            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&q=80",
-            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80",
-            "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80",
-            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80",
-            "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=400&q=80"
+            "https://github.com/sanjaivelusamy/birthday1/blob/main/Samyu/WhatsApp%20Image%202026-03-16%20at%2012.23.52%20PM%20(1).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-16%20at%2012.23.52%20PM.jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-16%20at%2012.23.53%20PM.jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.56%20PM%20(1).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.56%20PM%20(2).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.56%20PM.jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.57%20PM%20(1).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.57%20PM%20(2).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.57%20PM.jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.58%20PM.jpeg?raw=true"
         ];
         
         const PHOTO_CAPTIONS = [
@@ -879,9 +891,34 @@
             "Birthday Bliss 🎂"
         ];
 
-        // New page photos (using same for simplicity)
-        const NEWPAGE_PHOTO_URLS = PHOTO_URLS;
-        const NEWPAGE_PHOTO_CAPTIONS = PHOTO_CAPTIONS;
+        // ============================================
+        // NEW PAGE PHOTO COLLECTION - SEPARATE SET
+        // ============================================
+        const NEWPAGE_PHOTO_URLS = [
+            "https://github.com/sanjaivelusamy/birthday1/blob/main/Samyu/WhatsApp%20Image%202026-03-16%20at%2012.23.52%20PM%20(1).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-16%20at%2012.23.52%20PM.jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-16%20at%2012.23.53%20PM.jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.56%20PM%20(1).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.56%20PM%20(2).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.56%20PM.jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.57%20PM%20(1).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.57%20PM%20(2).jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.57%20PM.jpeg?raw=true",
+            "https://github.com/sanjaivelusamy/birthday1/blob/59330aa6d5bf972e6c9314c94b4abf3b13b890f1/Samyu/WhatsApp%20Image%202026-03-17%20at%203.34.58%20PM.jpeg?raw=true"
+        ];
+        
+        const NEWPAGE_PHOTO_CAPTIONS = [
+            "Memory 1 ✨",
+            "Memory 2 🌟",
+            "Memory 3 🎉",
+            "Memory 4 🥳",
+            "Memory 5 💖",
+            "Memory 6 📸",
+            "Memory 7 🌈",
+            "Memory 8 🎊",
+            "Memory 9 🌸",
+            "Memory 10 🎂"
+        ];
 
         // DOM Elements
         const accessScreen = document.getElementById('access-screen');
@@ -900,7 +937,6 @@
         const closeFullscreen = document.querySelector('.close-fullscreen');
         const particlesContainer = document.getElementById('particles-container');
         const birthdayAudio = document.getElementById('birthday-audio');
-        const popNumber = document.getElementById('pop-number');
         
         // Timer elements
         const timerYears = document.getElementById('timer-years');
@@ -912,7 +948,7 @@
         const timerMessage = document.getElementById('timer-message');
         const timerSub = document.getElementById('timer-sub');
 
-        // Pre-defined positions (adjusted for mobile)
+        // Pre-defined positions for main page
         const FIXED_POSITIONS = [
             { left: 5, top: 5, rotation: -8, scale: 1.1 },
             { left: 25, top: 8, rotation: 5, scale: 0.9 },
@@ -926,6 +962,7 @@
             { left: 90, top: 66, rotation: 6, scale: 0.98 }
         ];
 
+        // Timer variables
         let countdownInterval;
 
         // Initialize
@@ -968,7 +1005,13 @@
         function playBirthdayMusic() {
             birthdayAudio.volume = 0.5;
             birthdayAudio.currentTime = 0;
-            birthdayAudio.play().catch(() => {});
+            const playPromise = birthdayAudio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Audio play failed: ", error);
+                });
+            }
         }
 
         function playBlastSound() {
@@ -984,12 +1027,14 @@
                 oscillator.frequency.setValueAtTime(100, audioContext.currentTime);
                 oscillator.frequency.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
                 
-                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
                 
                 oscillator.start();
                 oscillator.stop(audioContext.currentTime + 0.5);
-            } catch (e) {}
+            } catch (e) {
+                console.log("Blast sound not supported", e);
+            }
         }
 
         function playTickSound() {
@@ -1002,10 +1047,10 @@
                 gainNode.connect(audioContext.destination);
                 
                 oscillator.frequency.value = 800;
-                gainNode.gain.value = 0.05;
+                gainNode.gain.value = 0.1;
                 
                 oscillator.start();
-                oscillator.stop(audioContext.currentTime + 0.05);
+                oscillator.stop(audioContext.currentTime + 0.1);
             } catch (e) {}
         }
 
@@ -1013,13 +1058,18 @@
             const now = new Date();
             const difference = TARGET_DATE - now;
             
-            if (difference <= 0) return null;
+            if (difference <= 0) {
+                return null; // Time's up!
+            }
             
+            // Calculate years, months, days, hours, minutes, seconds
+            // This is a simplified calculation - for exact months/years we'd need more complex logic
             const seconds = Math.floor(difference / 1000);
             const minutes = Math.floor(seconds / 60);
             const hours = Math.floor(minutes / 60);
             const days = Math.floor(hours / 24);
             
+            // Approximate months (30 days) and years (365 days)
             const years = Math.floor(days / 365);
             const months = Math.floor((days % 365) / 30);
             const remainingDays = days % 30;
@@ -1028,19 +1078,23 @@
             const remainingSeconds = seconds % 60;
             
             return {
-                years, months, days: remainingDays,
-                hours: remainingHours, minutes: remainingMinutes, seconds: remainingSeconds
+                years: years,
+                months: months,
+                days: remainingDays,
+                hours: remainingHours,
+                minutes: remainingMinutes,
+                seconds: remainingSeconds
             };
         }
 
         function updateTimerDisplay() {
             const timeRemaining = calculateTimeRemaining();
             
-            if (!timeRemaining) {
+            if (timeRemaining === null) {
+                // Time's up! Trigger the blast
                 timerMessage.textContent = "🎉 IT'S TIME! 🎉";
                 timerSub.textContent = "Get ready for the surprise...";
-                if (countdownInterval) clearInterval(countdownInterval);
-                showPopNumber();
+                blastOpen();
                 return;
             }
             
@@ -1051,94 +1105,451 @@
             timerMinutes.textContent = timeRemaining.minutes.toString().padStart(2, '0');
             timerSeconds.textContent = timeRemaining.seconds.toString().padStart(2, '0');
             
+            // Play tick sound every second
             playTickSound();
         }
 
-        function showPopNumber() {
-            popNumber.classList.remove('pop-active');
-            void popNumber.offsetWidth;
-            popNumber.classList.add('pop-active');
-            
-            setTimeout(blastOpen, 1500);
-        }
-
         function blastOpen() {
+            // Clear the interval
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            
+            // Play blast sound
+            playBlastSound();
+            
+            // Hide timer screen
             timerScreen.style.display = 'none';
+            
+            // Show main content with blast animation
             mainContent.style.display = 'block';
             mainContent.classList.add('blast-effect');
             
+            // Create all effects
             createScatteredPhotos();
             createParticles();
             
-            for (let i = 0; i < 3; i++) {
+            // Massive confetti blast
+            for (let i = 0; i < 5; i++) {
                 setTimeout(() => {
                     createConfetti();
                     createHearts();
-                }, i * 150);
+                }, i * 100);
             }
             
+            // Show buttons with delay
             setTimeout(() => {
                 continueBtn.style.display = 'block';
                 revealBtn.style.display = 'block';
+                
+                // Add bounce to buttons
+                continueBtn.style.animation = 'bounceIn 0.8s ease';
+                revealBtn.style.animation = 'bounceIn 0.8s ease';
             }, 800);
             
-            setTimeout(() => mainContent.classList.remove('blast-effect'), 1000);
+            // Remove blast class after animation
+            setTimeout(() => {
+                mainContent.classList.remove('blast-effect');
+            }, 1000);
         }
 
         function startCountdown() {
-            if (new Date() >= TARGET_DATE) {
-                timerMessage.textContent = "🎉 IT'S TIME! 🎉";
-                timerSub.textContent = "Get ready for the surprise...";
-                showPopNumber();
+            // Check if target time has already passed
+            const now = new Date();
+            if (now >= TARGET_DATE) {
+                // If target time has passed, blast immediately
+                blastOpen();
                 return;
             }
             
+            // Update display immediately
             updateTimerDisplay();
-            countdownInterval = setInterval(updateTimerDisplay, 1000);
+            
+            // Set up interval to update every second
+            countdownInterval = setInterval(() => {
+                updateTimerDisplay();
+            }, 1000);
         }
 
         function openRandomPhotoPage() {
             const randomPage = window.open('', '_blank');
-            // Simplified page for mobile
-            randomPage.document.write(`
+            
+            const pageHTML = `
                 <!DOCTYPE html>
-                <html>
+                <html lang="en">
                 <head>
                     <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-                    <title>Birthday Photos</title>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Happy Birthday Sam! - Special Collection</title>
                     <style>
-                        body { margin:0; background:#000; color:#fff; font-family:sans-serif; }
-                        .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; padding:10px; }
-                        img { width:100%; height:auto; border-radius:10px; border:2px solid #fff; cursor:pointer; }
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        
+                        body {
+                            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+                            min-height: 100vh;
+                            position: relative;
+                            overflow-x: hidden;
+                        }
+                        
+                        .random-photo-container {
+                            position: relative;
+                            width: 100%;
+                            min-height: 100vh;
+                            padding: 20px;
+                        }
+                        
+                        .random-photo {
+                            position: absolute;
+                            width: 220px;
+                            height: 280px;
+                            border-radius: 20px;
+                            overflow: hidden;
+                            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+                            cursor: pointer;
+                            transition: all 0.4s ease;
+                            border: 5px solid rgba(255, 255, 255, 0.5);
+                            animation: fadeIn 1s ease;
+                            background: white;
+                        }
+                        
+                        .random-photo:hover {
+                            transform: scale(1.3) rotate(5deg) !important;
+                            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
+                            z-index: 1000;
+                            border-color: rgba(255, 215, 0, 0.8);
+                        }
+                        
+                        .random-photo img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                        
+                        .photo-caption {
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+                            padding: 15px;
+                            color: white;
+                            font-size: 1rem;
+                            text-align: center;
+                            font-weight: bold;
+                            text-shadow: 1px 1px 3px black;
+                        }
+                        
+                        .close-btn {
+                            position: fixed;
+                            top: 20px;
+                            right: 30px;
+                            background: rgba(255, 255, 255, 0.2);
+                            backdrop-filter: blur(10px);
+                            border: 2px solid rgba(255, 255, 255, 0.3);
+                            color: white;
+                            font-size: 2.5rem;
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            z-index: 2000;
+                            transition: all 0.3s ease;
+                        }
+                        
+                        .close-btn:hover {
+                            background: rgba(255, 255, 255, 0.4);
+                            transform: rotate(90deg) scale(1.1);
+                        }
+                        
+                        .title {
+                            position: fixed;
+                            top: 20px;
+                            left: 20px;
+                            color: white;
+                            font-size: 2rem;
+                            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+                            background: rgba(0,0,0,0.3);
+                            backdrop-filter: blur(5px);
+                            padding: 10px 25px;
+                            border-radius: 50px;
+                            border: 1px solid rgba(255,255,255,0.2);
+                            z-index: 1500;
+                            font-family: 'Georgia', serif;
+                        }
+                        
+                        .fullscreen-modal {
+                            display: none;
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: rgba(0, 0, 0, 0.98);
+                            z-index: 3000;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                        
+                        .fullscreen-modal img {
+                            max-width: 95%;
+                            max-height: 95%;
+                            border-radius: 15px;
+                            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+                            border: 3px solid rgba(255, 255, 255, 0.3);
+                        }
+                        
+                        .modal-close {
+                            position: absolute;
+                            top: 35px;
+                            right: 45px;
+                            font-size: 3.5rem;
+                            color: white;
+                            cursor: pointer;
+                            transition: transform 0.3s ease;
+                            z-index: 3001;
+                            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+                            background: rgba(0,0,0,0.5);
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        
+                        .modal-close:hover {
+                            transform: rotate(90deg) scale(1.2);
+                            background: rgba(0,0,0,0.7);
+                        }
+                        
+                        @keyframes fadeIn {
+                            from { opacity: 0; transform: scale(0.8); }
+                            to { opacity: 1; transform: scale(1); }
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .random-photo {
+                                width: 150px;
+                                height: 200px;
+                            }
+                            .title {
+                                font-size: 1.2rem;
+                                top: 10px;
+                                left: 10px;
+                                padding: 8px 15px;
+                            }
+                        }
                     </style>
                 </head>
                 <body>
-                    <h2 style="text-align:center;padding:10px;">🎂 Happy Birthday Sam! 🎂</h2>
-                    <div class="gallery">
-                        ${PHOTO_URLS.map(url => `<img src="${url}" onclick="this.requestFullscreen?.()">`).join('')}
+                    <div class="title">🎂 Happy Birthday Sam! 🎂</div>
+                    <div class="close-btn" onclick="window.close()">×</div>
+                    <div class="random-photo-container" id="random-container"></div>
+                    
+                    <div class="fullscreen-modal" id="page-fullscreen">
+                        <span class="modal-close" id="modal-close-btn">×</span>
+                        <img id="modal-image" src="" alt="Fullscreen">
                     </div>
+                    
+                    <script>
+                        const photoURLs = ${JSON.stringify(NEWPAGE_PHOTO_URLS)};
+                        const photoCaptions = ${JSON.stringify(NEWPAGE_PHOTO_CAPTIONS)};
+                        
+                        const container = document.getElementById('random-container');
+                        const fullscreenModal = document.getElementById('page-fullscreen');
+                        const modalImage = document.getElementById('modal-image');
+                        const modalClose = document.getElementById('modal-close-btn');
+                        
+                        modalClose.addEventListener('click', function() {
+                            fullscreenModal.style.display = 'none';
+                        });
+                        
+                        fullscreenModal.addEventListener('click', function(e) {
+                            if (e.target === fullscreenModal) {
+                                fullscreenModal.style.display = 'none';
+                            }
+                        });
+                        
+                        const photoWidth = 220;
+                        const photoHeight = 280;
+                        const positions = [];
+                        
+                        function getRandomPosition() {
+                            const viewportWidth = window.innerWidth;
+                            const viewportHeight = window.innerHeight;
+                            
+                            const maxLeft = viewportWidth - photoWidth - 20;
+                            const maxTop = viewportHeight - photoHeight - 20;
+                            
+                            const left = Math.random() * maxLeft;
+                            const top = Math.random() * maxTop;
+                            const rotation = (Math.random() * 30 - 15);
+                            const scale = 0.8 + Math.random() * 0.4;
+                            
+                            return { left, top, rotation, scale };
+                        }
+                        
+                        function checkCollision(newPos, existingPositions) {
+                            const margin = 30;
+                            
+                            for (let i = 0; i < existingPositions.length; i++) {
+                                const pos = existingPositions[i];
+                                
+                                const newLeft = newPos.left - margin;
+                                const newRight = newPos.left + photoWidth + margin;
+                                const newTop = newPos.top - margin;
+                                const newBottom = newPos.top + photoHeight + margin;
+                                
+                                const oldLeft = pos.left - margin;
+                                const oldRight = pos.left + photoWidth + margin;
+                                const oldTop = pos.top - margin;
+                                const oldBottom = pos.top + photoHeight + margin;
+                                
+                                if (newLeft < oldRight && 
+                                    newRight > oldLeft && 
+                                    newTop < oldBottom && 
+                                    newBottom > oldTop) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }
+                        
+                        for (let i = 0; i < photoURLs.length; i++) {
+                            let attempts = 0;
+                            const maxAttempts = 500;
+                            let positionFound = false;
+                            
+                            while (!positionFound && attempts < maxAttempts) {
+                                const newPos = getRandomPosition();
+                                
+                                if (!checkCollision(newPos, positions)) {
+                                    positions.push(newPos);
+                                    positionFound = true;
+                                }
+                                
+                                attempts++;
+                            }
+                            
+                            if (!positionFound) {
+                                positions.push(getRandomPosition());
+                            }
+                        }
+                        
+                        positions.forEach((pos, index) => {
+                            const photoDiv = document.createElement('div');
+                            photoDiv.className = 'random-photo';
+                            photoDiv.style.left = pos.left + 'px';
+                            photoDiv.style.top = pos.top + 'px';
+                            photoDiv.style.transform = 'rotate(' + pos.rotation + 'deg) scale(' + pos.scale + ')';
+                            
+                            const img = document.createElement('img');
+                            img.src = photoURLs[index];
+                            img.alt = photoCaptions[index] || 'Birthday memory';
+                            
+                            const caption = document.createElement('div');
+                            caption.className = 'photo-caption';
+                            caption.textContent = photoCaptions[index];
+                            
+                            photoDiv.appendChild(img);
+                            photoDiv.appendChild(caption);
+                            container.appendChild(photoDiv);
+                            
+                            photoDiv.addEventListener('click', function() {
+                                modalImage.src = photoURLs[index];
+                                fullscreenModal.style.display = 'flex';
+                            });
+                        });
+                        
+                        function createConfetti() {
+                            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+                            for (let i = 0; i < 100; i++) {
+                                const confetti = document.createElement('div');
+                                confetti.style.position = 'fixed';
+                                confetti.style.width = (Math.random() * 8 + 4) + 'px';
+                                confetti.style.height = confetti.style.width;
+                                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                                confetti.style.left = Math.random() * 100 + '%';
+                                confetti.style.top = '-10px';
+                                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                                confetti.style.zIndex = '9999';
+                                confetti.style.animation = 'fall ' + (Math.random() * 3 + 2) + 's linear forwards';
+                                confetti.style.opacity = '0.8';
+                                document.body.appendChild(confetti);
+                                
+                                setTimeout(() => confetti.remove(), 5000);
+                            }
+                        }
+                        
+                        const style = document.createElement('style');
+                        style.textContent = \`
+                            @keyframes fall {
+                                0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+                                100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+                            }
+                            @keyframes floatUp {
+                                0% { transform: translateY(0) scale(0.5); opacity: 0.7; }
+                                100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+                            }
+                        \`;
+                        document.head.appendChild(style);
+                        
+                        createConfetti();
+                        
+                        for (let i = 0; i < 20; i++) {
+                            const heart = document.createElement('div');
+                            heart.innerHTML = '❤️';
+                            heart.style.position = 'fixed';
+                            heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                            heart.style.left = Math.random() * 100 + '%';
+                            heart.style.bottom = '0';
+                            heart.style.animation = 'floatUp ' + (Math.random() * 3 + 3) + 's ease-out forwards';
+                            heart.style.zIndex = '9998';
+                            heart.style.opacity = '0.7';
+                            heart.style.filter = 'drop-shadow(0 0 5px hotpink)';
+                            document.body.appendChild(heart);
+                            
+                            setTimeout(() => heart.remove(), 5000);
+                        }
+                    <\/script>
                 </body>
                 </html>
-            `);
+            `;
+            
+            randomPage.document.write(pageHTML);
             randomPage.document.close();
         }
 
         function createScatteredPhotos() {
             scatteredPhotos.innerHTML = '';
             PHOTO_URLS.forEach((url, index) => {
-                const pos = FIXED_POSITIONS[index];
+                const imageUrl = url.includes('?raw=true') ? url : url + '?raw=true';
+                const position = FIXED_POSITIONS[index];
                 const photo = document.createElement('div');
                 photo.className = 'floating-photo';
-                photo.style.left = pos.left + '%';
-                photo.style.top = pos.top + '%';
-                photo.style.setProperty('--initial-rotation', pos.rotation + 'deg');
-                photo.style.transform = `rotate(${pos.rotation}deg) scale(${pos.scale})`;
+                photo.style.left = position.left + '%';
+                photo.style.top = position.top + '%';
+                photo.style.setProperty('--initial-rotation', position.rotation + 'deg');
+                const delay = Math.random() * 2;
+                const duration = 4 + Math.random() * 3;
+                photo.style.animation = 'floatPhoto ' + duration + 's ease-in-out ' + delay + 's infinite';
+                photo.style.transform = 'rotate(' + position.rotation + 'deg) scale(' + position.scale + ')';
                 
                 const img = document.createElement('img');
-                img.src = url;
-                img.alt = '';
+                img.src = imageUrl;
+                img.alt = 'Memory ' + (index + 1);
                 img.loading = 'lazy';
+                img.onerror = function() {
+                    console.log('Failed to load image: ' + imageUrl);
+                    this.src = 'https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80';
+                };
                 
                 const caption = document.createElement('div');
                 caption.className = 'photo-caption';
@@ -1148,9 +1559,9 @@
                 photo.appendChild(caption);
                 scatteredPhotos.appendChild(photo);
                 
-                photo.addEventListener('click', (e) => {
+                photo.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    fullscreenImg.src = url;
+                    fullscreenImg.src = imageUrl;
                     fullscreenPhoto.style.display = 'flex';
                 });
             });
@@ -1158,67 +1569,81 @@
 
         function createParticles() {
             particlesContainer.innerHTML = '';
-            for (let i = 0; i < 15; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.width = (Math.random() * 3 + 1) + 'px';
-                p.style.height = p.style.width;
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                p.style.animationDelay = Math.random() * 5 + 's';
-                p.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
-                particlesContainer.appendChild(p);
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = (Math.random() * 3 + 1) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.background = 'hsl(' + Math.random() * 360 + ', 100%, 70%)';
+                particle.style.opacity = '0.6';
+                particlesContainer.appendChild(particle);
             }
         }
 
         function createConfetti() {
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'];
-            for (let i = 0; i < 30; i++) {
-                const c = document.createElement('div');
-                c.className = 'confetti';
-                c.style.left = Math.random() * 100 + '%';
-                c.style.width = (Math.random() * 6 + 3) + 'px';
-                c.style.height = c.style.width;
-                c.style.background = colors[Math.floor(Math.random() * colors.length)];
-                c.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                c.style.animationDelay = Math.random() * 2 + 's';
-                document.body.appendChild(c);
-                setTimeout(() => c.remove(), 4000);
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.width = (Math.random() * 8 + 4) + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
             }
         }
 
         function createHearts() {
-            for (let i = 0; i < 10; i++) {
-                const h = document.createElement('div');
-                h.className = 'heart';
-                h.innerHTML = '❤️';
-                h.style.left = Math.random() * 100 + '%';
-                h.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                h.style.animationDelay = Math.random() * 2 + 's';
-                document.body.appendChild(h);
-                setTimeout(() => h.remove(), 4000);
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
             }
         }
 
         function verifyCode() {
-            if (codeInput.value.trim() === ACCESS_CODE) {
+            const enteredCode = codeInput.value.trim();
+            if (enteredCode === ACCESS_CODE) {
                 errorMessage.style.display = 'none';
+                
+                // Hide access screen
                 accessScreen.classList.add('hidden');
+                
+                // Show timer screen
                 setTimeout(() => {
                     accessScreen.style.display = 'none';
                     timerScreen.style.display = 'flex';
+                    
+                    // Start countdown to target date
                     startCountdown();
                 }, 500);
+                
             } else {
                 errorMessage.style.display = 'block';
                 codeInput.value = '';
                 codeInput.focus();
+                accessScreen.style.animation = 'none';
+                setTimeout(() => {
+                    accessScreen.style.animation = 'shake 0.5s ease';
+                }, 10);
             }
         }
 
-        console.log("Mobile optimized birthday page ready!");
+        console.log("Access Code: Sam190304 | Countdown to March 19, 2026 00:00:00");
         
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', function(e) {
             if (e.key.toUpperCase() === 'H' && e.ctrlKey) {
                 codeInput.value = ACCESS_CODE;
                 verifyCode();
